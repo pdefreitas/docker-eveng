@@ -16,12 +16,14 @@ RUN wget -q -O- http://www.eve-ng.net/repo/eczema@ecze.com.gpg.key | apt-key add
 
 RUN add-apt-repository "deb [arch=amd64]  http://www.eve-ng.net/repo xenial main"
 
-RUN apt-get update && apt-get upgrade -y
+RUN apt-get update
 
 RUN apt-get install -y eve-ng \
                        python \
                        python-pip \
                        build-essential
+
+RUN apt-get upgrade -y
 
 RUN /opt/unetlab/wrappers/unl_wrapper -a fixpermissions
 
