@@ -9,18 +9,18 @@ COPY ./etc/* /etc/
 
 COPY ./images/iol/* /opt/unetlab/addons/iol/bin/
 
-RUN apt install wget bash
+RUN apt-get install wget bash
 
 RUN wget -O - http://www.eve-ng.net/repo/eczema@ecze.com.gpg.key | sudo apt-key add -
 
-RUN add-apt-repository "deb [arch=amd64]  http://www.eve-ng.net/repo xenial main"
+RUN sudo add-apt-repository "deb [arch=amd64]  http://www.eve-ng.net/repo xenial main"
 
-RUN apt update && sudo apt upgrade -y
+RUN apt-get update && sudo apt-get upgrade -y
 
-RUN apt install eve-ng\
-                python \
-                python-pip \
-                build-essential
+RUN apt-get install eve-ng\
+                    python \
+                    python-pip \
+                    build-essential
 
 RUN /opt/unetlab/wrappers/unl_wrapper -a fixpermissions
 
