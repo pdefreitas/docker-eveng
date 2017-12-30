@@ -17,6 +17,12 @@ RUN apt-get update && apt-get upgrade -y
 
 RUN apt-get install -y apt-utils wget bash software-properties-common
 
+# add run user
+RUN useradd -ms /bin/bash user
+RUN echo "user:password" | chpasswd
+
+USER user
+
 RUN wget -q -O- http://www.eve-ng.net/repo/eczema@ecze.com.gpg.key | apt-key add
 
 RUN add-apt-repository "deb [arch=amd64]  http://www.eve-ng.net/repo xenial main"
@@ -30,9 +36,31 @@ RUN DEBIAN_FRONTEND=noninteractive apt-get install -y eve-ng \
 
 RUN apt-get upgrade -y
 
+RUN cp -rp /lib/firmware/$(uname -r)/bnx2 /lib/firmware/
+
+USER root
+
 RUN /opt/unetlab/wrappers/unl_wrapper -a fixpermissions
 
-RUN cp -rp /lib/firmware/$(uname -r)/bnx2 /lib/firmware/
+RUN sed -i -e 's/GRUB_CMDLINE_LINUX_DEFAULT=.*/GRUB_CMDLINE_LINUX_DEFAULT=""/' /etc/default/grub
+RUN sed -i -e 's/GRUB_CMDLINE_LINUX=.*/GRUB_CMDLINE_LINUX="net.ifnames=0 biosdevname=0 console=ttyS1,115200"/' /etc/default/grub
+RUN update-grub
+
+#add a new systemd file to ensure apache2 starts
+RUN cat >> /lib/systemd/system/apache2.service.d/apache2-systemd.conf << EOF \
+[Unit] \
+Description=Apache HTTP Server \
+After=syslog.target network.target \
+[Service] \
+Type=forking \
+RemainAfterExit=no \
+Restart=always \
+PIDFile=/var/run/apache2/apache2.pid \
+[Install] \
+WantedBy=multi-user.target \
+EOF
+
+RUN touch /opt/ovf/.configured
 
 COPY entrypoint.sh /root/entrypoint.sh
 COPY piscokeygen.py /root/piscokeygen.py
