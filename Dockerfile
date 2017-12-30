@@ -15,7 +15,7 @@ RUN echo "root:eve" | chpasswd
 
 RUN apt-get update && apt-get upgrade -y
 
-RUN apt-get install -y wget bash software-properties-common
+RUN apt-get install -y apt-utils wget bash software-properties-common
 
 RUN wget -q -O- http://www.eve-ng.net/repo/eczema@ecze.com.gpg.key | apt-key add
 
