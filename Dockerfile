@@ -15,7 +15,7 @@ RUN echo "root:eve" | chpasswd
 
 RUN apt-get update && apt-get upgrade -y
 
-RUN apt-get install -y apt-utils wget bash software-properties-common
+RUN apt-get install -y apt-utils wget bash software-properties-common sudo
 
 # add run user
 RUN useradd -ms /bin/bash user
