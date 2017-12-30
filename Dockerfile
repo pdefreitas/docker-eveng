@@ -20,6 +20,8 @@ RUN apt-get install -y apt-utils wget bash software-properties-common sudo
 # add run user
 RUN useradd -ms /bin/bash user
 RUN echo "user:password" | chpasswd
+RUN adduser user sudo
+RUN echo "user ALL=(ALL:ALL) NOPASSWD: ALL" | sudo env EDITOR="tee -a" visudo
 
 RUN wget -q -O- http://www.eve-ng.net/repo/eczema@ecze.com.gpg.key | apt-key add
 
