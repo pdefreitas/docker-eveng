@@ -29,14 +29,14 @@ RUN add-apt-repository "deb [arch=amd64]  http://www.eve-ng.net/repo xenial main
 
 RUN apt-get update
 
-RUN DEBIAN_FRONTEND=noninteractive apt-get install -y eve-ng \
-                                                      python \
-                                                      python-pip \
-                                                      build-essential
-
+RUN DEBIAN_FRONTEND=noninteractive sudo apt-get install -y eve-ng \
+                                                           python \
+                                                           python-pip \
+                                                           build-essential
+                                                           
 RUN apt-get upgrade -y
 
-RUN cp -rp /lib/firmware/$(uname -r)/bnx2 /lib/firmware/
+RUN sudo cp -rp /lib/firmware/$(uname -r)/bnx2 /lib/firmware/
 
 USER root
 
