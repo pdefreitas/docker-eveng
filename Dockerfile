@@ -9,6 +9,8 @@ COPY ./etc/* /etc/
 
 COPY ./images/iol/* /opt/unetlab/addons/iol/bin/
 
+RUN apt install wget bash
+
 RUN wget -O - http://www.eve-ng.net/repo/eczema@ecze.com.gpg.key | sudo apt-key add -
 
 RUN add-apt-repository "deb [arch=amd64]  http://www.eve-ng.net/repo xenial main"
