@@ -8,6 +8,9 @@ COPY ./etc/* /etc/
 
 COPY ./images/iol/* /opt/unetlab/addons/iol/bin/
 
+# Avoid ERROR: invoke-rc.d: policy-rc.d denied execution of start.
+RUN sed -i "s/^exit 101$/exit 0/" /usr/sbin/policy-rc.d
+
 RUN echo "root:eve" | chpasswd
 
 RUN apt-get update && apt-get upgrade -y
