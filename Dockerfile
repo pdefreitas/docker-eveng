@@ -14,7 +14,7 @@ RUN apt-get install wget bash
 
 RUN wget -O - http://www.eve-ng.net/repo/eczema@ecze.com.gpg.key | sudo apt-key add -
 
-RUN sudo add-apt-repository "deb [arch=amd64]  http://www.eve-ng.net/repo xenial main"
+RUN add-apt-repository "deb [arch=amd64]  http://www.eve-ng.net/repo xenial main"
 
 RUN apt-get update && sudo apt-get upgrade -y
 
