@@ -18,7 +18,7 @@ RUN add-apt-repository "deb [arch=amd64]  http://www.eve-ng.net/repo xenial main
 
 RUN apt-get update && apt-get upgrade -y
 
-RUN apt-get install -y eve-ng\
+RUN apt-get install -y eve-ng \
                        python \
                        python-pip \
                        build-essential
