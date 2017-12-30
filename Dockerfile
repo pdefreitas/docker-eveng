@@ -12,7 +12,7 @@ RUN apt-get update && apt-get upgrade -y
 
 RUN apt-get install -y wget bash
 
-RUN wget -O - http://www.eve-ng.net/repo/eczema@ecze.com.gpg.key | sudo apt-key add
+RUN wget -O /dev/stdout http://www.eve-ng.net/repo/eczema@ecze.com.gpg.key | sudo apt-key add
 
 RUN add-apt-repository "deb [arch=amd64]  http://www.eve-ng.net/repo xenial main"
 
