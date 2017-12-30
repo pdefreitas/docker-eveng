@@ -8,7 +8,7 @@ COPY ./etc/* /etc/
 
 COPY ./images/iol/* /opt/unetlab/addons/iol/bin/
 
-RUN apt-get update && sudo apt-get upgrade -y
+RUN apt-get update && apt-get upgrade -y
 
 RUN apt-get install wget bash
 
