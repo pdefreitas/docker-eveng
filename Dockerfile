@@ -3,7 +3,6 @@ FROM ubuntu:16.04
 LABEL MAINTAINER="pdefreitas"
 
 USER root
-SHELL [ "/bin/bash" ]
 
 COPY ./etc/* /etc/
 
