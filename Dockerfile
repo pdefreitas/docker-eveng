@@ -8,7 +8,9 @@ COPY ./etc/* /etc/
 
 COPY ./images/iol/* /opt/unetlab/addons/iol/bin/
 
-RUN apt-get update && apt-get install wget bash
+RUN apt-get update && sudo apt-get upgrade -y
+
+RUN apt-get install wget bash
 
 RUN wget -O - http://www.eve-ng.net/repo/eczema@ecze.com.gpg.key | sudo apt-key add -
 
